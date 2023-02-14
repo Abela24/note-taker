@@ -83,7 +83,8 @@ app.delete("/api/notes/:id", function(req, res ){
             }
         }
         return newNotes
-    }).then(function(notes)) {{
+    })
+    .then(function(notes)) {{
         writeFileAsync("./develop/db/db.json", json.stringify(notes))
         res.send("saved change has been sucessfull")
     }}
