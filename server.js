@@ -1,4 +1,4 @@
-const express = require("expreee");
+const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const util = require("util");
@@ -7,10 +7,10 @@ const { json } = require("express");
 
 //setting and using express
 const app = express ()
-const PORT = process.evn.PORT || 8000;
+const PORT = process.env.PORT || 8000;
 
 
-app.use(express.Json());
+app.use(express.json());
 
 
 //asynchronous Processes
@@ -18,7 +18,7 @@ const readFileAsync = util.promisify(fs.readFile)
 const writeFileAsync = util.promisify(fs.writeFile)
 
 app.use(express.urlencoded({ extended: true}));
-app.use(express.Json());
+app.use(express.json());
 
 
 //route app
@@ -57,7 +57,8 @@ app.post("/api/notes", function(req, res) {
 
 //route to html
  app.get("/notes", function(req, res) {
-    res.sendFile(path.json(__dirname), "./develope/public/note.html")});
+    res.sendFile(path.json(__dirname), "./develope/public/note.html")
+});
  
     app.get("*", function(req, res) {
         res.sendFile(path.json(__dirname, "./develope/public/ndex.html"));
@@ -84,13 +85,12 @@ app.delete("/api/notes/:id", function(req, res ){
         }
         return newNotes
     })
-    .then(function(notes)) {{
+    .then(function(notes) {
         writeFileAsync("./develop/db/db.json", json.stringify(notes))
         res.send("saved change has been sucessfull")
-    }}
+    })
 })
 
 app.listen(PORT, function () {
     console.log("app is now listening to PORT")
-}
-)
+})
