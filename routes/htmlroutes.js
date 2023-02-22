@@ -1,13 +1,13 @@
 const note = require('express').Router();
-
+const path = require('path');
 
 
 note.get("/notes", function(req, res) {
-    res.sendFile(path.json(__dirname), "./develope/public/note.html")
+    res.sendFile(path.join(__dirname), "../note.html")
 });
  
     note.get("*", function(req, res) {
-        res.sendFile(path.json(__dirname, "./develope/public/ndex.html"));
+        res.sendFile(path.join(__dirname, "../index.html"));
     })
 
     module.exports = note;

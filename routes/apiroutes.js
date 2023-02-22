@@ -15,11 +15,13 @@ note.post("", function(req, res) {
     note.id = notes.length + 1
     notes.push(notes);
     return notes
+    .then(function(notes){
+        writeFileAsync("./db/db.json", JSON.stringify(notes))
+        res.Json(notes);
+    })
+    
 })
-.then(function(notes){
-    writeFileAsync("./db/db.json", JSON.stringify(notes))
-    res.Json(notes);
-})
+
 
 
 
