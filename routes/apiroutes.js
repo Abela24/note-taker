@@ -27,11 +27,11 @@ note.post("", function(req, res) {
 
 //route to html
  note.get("/notes", function(req, res) {
-    res.sendFile(path.json(__dirname), "./develope/public/note.html")
+    res.sendFile(path.json(__dirname), "./public/note.html")
 });
  
     note.get("*", function(req, res) {
-        res.sendFile(path.json(__dirname, "./develope/public/ndex.html"));
+        res.sendFile(path.json(__dirname, "./public/ndex.html"));
     })
 
     
@@ -45,7 +45,7 @@ note.post("", function(req, res) {
 //delete request
 note.delete("/api/notes/:id", function(req, res ){
     const idDelete = parseInt(req.param.id);
-    readFileAsync("./Develope/db/db.json", "uft8").then(function(data){
+    readFileAsync("./db/db.json", "uft8").then(function(data){
         const notes = [].concat(json.parse(data));
         const newNotes = []
         for (let i = 0; i<notes.length; i++) {
@@ -56,7 +56,7 @@ note.delete("/api/notes/:id", function(req, res ){
         return newNotes
     })
     .then(function(notes) {
-        writeFileAsync("./develop/db/db.json", json.stringify(notes))
+        writeFileAsync("./db/db.json", json.stringify(notes))
         res.send("saved change has been sucessfull")
     })
 })

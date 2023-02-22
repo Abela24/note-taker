@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const util = require("util");
 const { json } = require("express");
+const htmlRoutes = require("./routes/htmlroutes")
 //these are the dependecies
 
 //setting and using express
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use("/", htmlRoutes)
 
 //asynchronous Processes
 const {
@@ -54,18 +56,18 @@ app.post("/api/notes", function (req, res) {
 
 
 
-//route to html
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "./public/index.html"));
-})
+// //route to html
+// app.get("/", function (req, res) {
+//     res.sendFile(path.join(__dirname, "./public/index.html"));
+// })
 
-app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname), "./public/note.html")
-});
+// app.get("/notes", function (req, res) {
+//     res.sendFile(path.join(__dirname), "./public/notes.html")
+// });
 
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "./public/index.html"));
-})
+// app.get("*", function (req, res) {
+//     res.sendFile(path.join(__dirname, "./public/index.html"));
+// })
 
 
 
